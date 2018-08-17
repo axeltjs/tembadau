@@ -19,4 +19,13 @@ class Produk extends Model
         'lokasi_beli', // khusus bahan
         'produk'
     ];
+
+    public function scopeFilter($query, $request)
+    {
+        if($request->has('q')){
+            return $query->where('nama','like','%'.$request->get('q').'%')
+            ->orWhere('jenis_produk','like','%'.$request->get('q').'%')
+            ->orWhere('lokasi_beli','like','%'.$request->get('q').'%');
+        }
+    }
 }

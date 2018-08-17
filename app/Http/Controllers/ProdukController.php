@@ -18,10 +18,10 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->get('produk') == 0){
-            $data = Produk::where('produk', 0)->paginate(10);
+        if($request->get('produk') == 0 && $request->has('produk')){
+            $data = Produk::where('produk', 0)->filter($request)->paginate(10);
         }else{
-            $data = Produk::where('produk', 1)->paginate(10);
+            $data = Produk::where('produk', 1)->filter($request)->paginate(10);
         }
         $view = [
             'items' => $data

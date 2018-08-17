@@ -6,8 +6,20 @@
 		<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li><a href="{{ url('/home') }}">Dashboard</a></li>
-				<li class="active">Buku</li>
-			</ul>
+				<li class="active">Item Gudang</li>
+            </ul>
+            <form method="get" class="form-horizontal tasi-form" action="{{ url('produk') }}" >
+                <div class="col-sm-10">
+                    {{ csrf_field() }}
+                    {!! Form::hidden('produk', Request::get('produk') ?? 1) !!}
+                    {!! Form::text('q', old('q'), ['class' => 'form-control']) !!}
+                </div>
+                <div class="col-sm-2">
+                    {!! Form::submit('Cari', ['class' => 'btn btn-primary btn-block']) !!}
+                </div>
+            {!! Form::close() !!}
+            <div class="clearfix"></div>
+            <br>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h2 class="panel-title">Produk</h2>
