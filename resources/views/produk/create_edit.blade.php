@@ -5,11 +5,11 @@
 			<div class="col-md-12">
 			<ul class="breadcrumb">
 				<li><a href="{{ url('/home') }}">Dashboard</a></li>
-				<li class="active">Tambah Item Gudang</li>
+				<li class="active">Tambah/Ubah Item Gudang</li>
 			</ul>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h2 class="panel-title">Tambah Item</h2>
+					<h2 class="panel-title">Tambah/Ubah Item</h2>
 				</div>
 					<div class="panel-body">
 						@if($method == 'create')

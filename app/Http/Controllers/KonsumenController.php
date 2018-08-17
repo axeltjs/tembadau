@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\ProdukRequest;
-use App\Model\Produk;
+use App\Http\Requests\KonsumenRequest;
+use App\Model\Konsumen;
 use Form;
 use Html;
 use Session;
 
-class ProdukController extends Controller
+class KonsumenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,15 +18,12 @@ class ProdukController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->get('produk') == 0 && $request->has('produk')){
-            $data = Produk::where('produk', 0)->filter($request)->orderBy('nama')->paginate(10);
-        }else{
-            $data = Produk::where('produk', 1)->filter($request)->orderBy('nama')->paginate(10);
-        }
+        $data = Konsumen::filter($request)->orderBy('no_konsumen')->paginate(10);
         $view = [
             'items' => $data
         ];
-        return view('produk.index')->with($view);
+        return view('konsumen.index')->with($view);
+
     }
 
     /**
@@ -39,7 +36,7 @@ class ProdukController extends Controller
         $view = [
             'method' => 'create',
         ];
-        return view('produk.create_edit')->with($view);
+        return view('konsumen.create_edit')->with($view);
 
     }
 
@@ -49,10 +46,10 @@ class ProdukController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProdukRequest $request)
+    public function store(Request $request)
     {
-        $data = Produk::create($request->all());
-        if($data){
+        $data = Konsumen::create($request->all());
+        if ($data) {
             Session::flash("flash_notification", [
                             "level"=>"success",
                             "message"=>"Data berhasil ditambahkan!"
@@ -80,12 +77,12 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        $data = Produk::findOrFail($id);
+        $data = Konsumen::findOrFail($id);
         $view = [
             'method' => 'edit',
             'data'   => $data
         ];
-        return view('produk.create_edit')->with($view);
+        return view('konsumen.create_edit')->with($view);
 
     }
 
@@ -96,9 +93,9 @@ class ProdukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProdukRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $data = Produk::findOrFail($id);
+        $data = Konsumen::findOrFail($id);
         $data = $data->update($request->all());
         if ($data) {
             Session::flash("flash_notification", [
@@ -118,7 +115,7 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        $data = Produk::findOrFail($id)->delete();     
+        $data = Konsumen::findOrFail($id)->delete();
         if ($data) {
             Session::flash("flash_notification", [
                                 "level"=>"success",
@@ -126,6 +123,6 @@ class ProdukController extends Controller
                             ]);
             return redirect()->back();
         }
-   
+
     }
 }

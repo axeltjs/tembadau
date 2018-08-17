@@ -27,3 +27,4 @@ Route::post('register', 'Auth\RegisterController@register');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/produk','ProdukController');
+Route::resource('konsumen','KonsumenController');
