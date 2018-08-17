@@ -46,7 +46,7 @@ class KonsumenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(KonsumenRequest $request)
     {
         $data = Konsumen::create($request->all());
         if ($data) {
@@ -93,7 +93,7 @@ class KonsumenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(KonsumenRequest $request, $id)
     {
         $data = Konsumen::findOrFail($id);
         $data = $data->update($request->all());
